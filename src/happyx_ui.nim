@@ -1,10 +1,10 @@
 import
   happyx_ui/[
-    core, column, button
+    core, column, row, button, image
   ]
 
 
 export
   core,
-  column,
-  button
+  column, row,
+  button, image
