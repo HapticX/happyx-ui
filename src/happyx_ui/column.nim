@@ -1,13 +1,16 @@
-import happyx
+import
+  happyx,
+  ./core,
+  ./base
 
 
-component Column:
+component Column of Base:
   spacing: string = "0"
-  justify_content: string = "start"
-  align_items: string = "start"
+  justifyContent: string = "start"
+  alignItems: string = "start"
 
   html:
-    tDiv(class = "column"):
+    tDiv(class = "column", style = self.modifier.build()):
       slot
   
   `style`: """
@@ -15,7 +18,7 @@ component Column:
       display: flex;
       flex-direction: column;
       gap: <self.spacing>;
-      justify-content: <self.justify_content>;
-      align-items: <self.align_items>;
+      justify-content: <self.justifyContent>;
+      align-items: <self.alignItems>;
     }
   """

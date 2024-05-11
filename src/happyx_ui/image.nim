@@ -1,9 +1,11 @@
 import
   std/strutils,
-  happyx
+  happyx,
+  ./core,
+  ./base
 
 
-component Image:
+component Image of Base:
   source: string = ""
   alt: string = ""
   width: string = "auto"
@@ -13,6 +15,7 @@ component Image:
     if self.source.endsWith"svg":
       tObject(
         type = "image/svg+xml",
+        style = self.modifier.build(),
         data = self.source,
         width =
           if self.width != "auto":
@@ -26,7 +29,7 @@ component Image:
             "",
       )
     else:
-      tImg(src = self.source, alt = self.alt)
+      tImg(src = self.source, alt = self.alt, style = self.modifier.build())
   
   `style`: """
     img {

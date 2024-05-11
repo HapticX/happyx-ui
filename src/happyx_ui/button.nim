@@ -1,6 +1,8 @@
 import
   happyx,
-  ./colors
+  ./colors,
+  ./core,
+  ./base
 
 
 type
@@ -8,11 +10,11 @@ type
 const defaultButtonAction = proc() = discard
 
 
-component Button:
+component Button of Base:
   action: ButtonAction = defaultButtonAction
 
   html:
-    tButton:
+    tButton(style = self.modifier.build()):
       slot
       @click:
         self.action()

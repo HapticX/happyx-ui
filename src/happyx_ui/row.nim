@@ -1,20 +1,23 @@
-import happyx
+import
+  happyx,
+  ./core,
+  ./base
 
 
-component Row:
+component Row of Base:
   spacing: string = "0"
-  justify_content: string = "start"
-  align_items: string = "start"
+  justifyContent: string = "start"
+  alignItems: string = "start"
 
   html:
-    tDiv(class = "row"):
+    tDiv(class = "row", style = self.modifier.build()):
       slot
   
   `style`: """
     div.row {
       display: flex;
       gap: <self.spacing>;
-      justify-content: <self.justify_content>;
-      align-items: <self.align_items>;
+      justify-content: <self.justifyContent>;
+      align-items: <self.alignItems>;
     }
   """
