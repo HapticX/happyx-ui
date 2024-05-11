@@ -1,0 +1,21 @@
+# IDE
+.idea/
+.vs-code/
+.vscode/
+.vs/
+
+# Cache
+nimcache/
+nimble/
+htmldocs/
+
+# builded
+**/build/
+happyx_ui_linkerArgs.txt
+
+# Logs
+*.log
+
+# Compiled
+*.js
+*.exe

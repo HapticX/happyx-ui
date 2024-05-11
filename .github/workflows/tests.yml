@@ -1,0 +1,77 @@
+name: Testing 👨‍🔬
+
+on:
+  push:
+    branches:
+      - 'master'
+      - 'dev'
+    paths-ignore:
+      - 'docs/**'
+      - '.github/ISSUE_TEMPLATE/*'
+      - '*.md'
+      - '*.nimble'
+      - '.gitignore'
+      - 'LICENSE'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - '.github/ISSUE_TEMPLATE/*'
+      - '*.md'
+      - '*.nimble'
+      - '.gitignore'
+      - 'LICENSE'
+
+jobs:
+  dependencies:
+    name: Install dependencies 🧩
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        nim_version:
+          - '2.0.0'
+          - '2.0.4'
+    env:
+      TIMEOUT_EXIT_STATUS: 124
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: ${{ matrix.nim_version }}
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.nimble
+            ~/.choosenim
+          key: ${{ runner.os }}-nimble-${{ hashFiles('*.nimble') }}
+      - name: Install Dependencies 🔃
+        run: |
+          nimble refresh
+          nimble install -y -d
+  js:
+    name: Test with JavaScript 🧪
+    needs: dependencies
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+    env:
+      TIMEOUT_EXIT_STATUS: 124
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.nimble
+            ~/.choosenim
+          key: ${{ runner.os }}-nimble-${{ hashFiles('*.nimble') }}
+      - name: Build JS tests 🍍
+        run: |
+          cd tests
+          for file in $(ls -v testjs*.nim); do
+            echo "###===--- JS Test for " $file " ---===###"
+            /home/runner/.nimble/bin/nim js -d:debug --hints:off --warnings:off $file
+          done
+        shell: bash

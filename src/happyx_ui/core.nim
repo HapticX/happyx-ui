@@ -1,0 +1,5 @@
+proc px*(val: SomeNumber): string = $val.float & "px"
+proc em*(val: SomeNumber): string = $val.float & "em"
+proc rem*(val: SomeNumber): string = $val.float & "rem"
+proc vw*(val: int): string = $val & "vw"
+proc vh*(val: int): string = $val & "vh"
