@@ -47,7 +47,7 @@ jobs:
           nimble refresh
           nimble install happyx -y
       
-      - name: Build HappyX website 🌐
+      - name: Build HappyX-UI Demo example 🌐
         timeout-minutes: 2
         run: |
           cd tests
@@ -63,7 +63,7 @@ jobs:
       
       - name: Screenshot Website
         run: |
-          pageres https://hapticx.github.io/happyx-ui/#/ --delay=5 --filename='screenshot.png'
+          pageres https://hapticx.github.io/happyx-ui/#/ --delay=5 --filename='screenshot'
 
       - name: Commit screenshot 🔨
         run: |
