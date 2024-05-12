@@ -295,7 +295,7 @@ proc Switcher*(onToggle: OnToggle = defOnToggle, state: State[bool] = nil,
         background-color: <PRIMARY_ACTIVE_COLOR>;
       }
 
-      label.hpx-checkbox-label-<i> {
+      label.hpx-switch-label-<i> {
         font-size: 18px;
         user-select: none;
         cursor: pointer;
