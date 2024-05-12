@@ -3,7 +3,7 @@
 # HappyX-UI
 ### HappyX UI library
 
-[![Github Pages](https://img.shields.io/badge/LIVE_DEMO-100000?style=for-the-badge&logo=githubpages&logoColor=000000&labelColor=FFFFFF&color=CD7777)](https://hapticx.github.io/happyx-ui/#/)
+[![Github Pages](https://img.shields.io/badge/LIVE_DEMO-100000?style=for-the-badge&logo=github&logoColor=f44336&labelColor=141d1f&color=f44336)](https://hapticx.github.io/happyx-ui/#/)
 
 </div>
 
