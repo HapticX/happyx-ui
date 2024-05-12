@@ -113,6 +113,22 @@ proc height*(self: Modifier, value: string): Modifier =
   self
 
 
+proc minWidth*(self: Modifier, value: string): Modifier =
+  self.style.add(fmt"min-width: {value}")
+  self
+proc minHeight*(self: Modifier, value: string): Modifier =
+  self.style.add(fmt"min-height: {value}")
+  self
+
+
+proc maxWidth*(self: Modifier, value: string): Modifier =
+  self.style.add(fmt"max-width: {value}")
+  self
+proc maxHeight*(self: Modifier, value: string): Modifier =
+  self.style.add(fmt"max-height: {value}")
+  self
+
+
 proc rotate*(self: Modifier, x, y, z: bool, value: string): Modifier =
   let i = self.indexOf("transform")
   if i != -1:

@@ -68,8 +68,8 @@ jobs:
       - name: Commit screenshot 🔨
         run: |
           ls
-          git config --local user.email "action[bot]@github.com"
-          git config --local user.name "github-actions[bot]"
+          git config --local user.email ${{ secrets.BOT_EMAIL }}
+          git config --local user.name "github-actions [bot]"
           git add screenshot.png
           git commit -m "[bot] update screenshot.png"
 

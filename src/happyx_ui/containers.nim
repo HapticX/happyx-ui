@@ -7,9 +7,7 @@ proc Box*(horizontal: string = "start", vertical: string = "start",
           modifier: Modifier = initModifier(), class: string = "", stmt: TagRef = nil): TagRef =
   if not stmt.isNil:
     for i in stmt.childNodes:
-      echo i
       i.style.position = "absolute"
-      echo i
   let id = uid()
   buildHtml:
     tDiv(class = fmt"hpx-box-{id} {class}", style = modifier.build()):
