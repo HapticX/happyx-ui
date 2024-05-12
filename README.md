@@ -22,7 +22,7 @@ This library was inspired by Jetpack Compose. It contains components that allow 
 - [x] `Text`;
 - [x] `Image` (default + svg support);
 - [x] `Card`;
-- [ ] `Box` (container with child position absolute);
+- [x] `Box` (container with child position absolute);
 - [ ] `Grid`;
 - [ ] `Slider` (range slider);
 - [ ] `Stepper` (number changer);

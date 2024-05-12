@@ -138,6 +138,21 @@ proc cursor(self: Modifier, cursor: Cursor): Modifier =
   self
 
 
+# Positions
+proc absolute*(self: Modifier): Modifier =
+  self.style.add("position: absolute")
+  self
+proc relative*(self: Modifier): Modifier =
+  self.style.add("position: relative")
+  self
+proc fixed*(self: Modifier): Modifier =
+  self.style.add("position: fixed")
+  self
+proc sticky*(self: Modifier): Modifier =
+  self.style.add("position: sticky")
+  self
+
+
 proc build*(self: Modifier): string =
   self.style.join(";")
 proc build*(self: State[Modifier]): string =

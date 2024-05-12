@@ -19,7 +19,7 @@ appRoutes "app":
       .textColor(FOREGROUND_COLOR)
     ):
       Column(0.5.rem):
-        Title("Buttons")
+        Title("Buttons 🧈")
         Row(1.rem):
           Button(proc() =
             echo "default button was clicked"
@@ -29,7 +29,7 @@ appRoutes "app":
             echo "outline button was clicked"
           ):
             "outline button"
-        Title("Cards")
+        Title("Cards 🎴")
         Row(1.rem):
           Card():
             Column(1.rem):
@@ -46,6 +46,17 @@ appRoutes "app":
               Checkbox(state = isMale):
                 "Are you male?"
               Progress(state = amount)
+        Title("Box Container 👀")
+        Box(
+          horizontal = "center", vertical = "center",
+          modifier = initModifier()
+            .width(256.px)
+            .height(256.px)
+        ):
+          Surface(initModifier().width(200.px).height(200.px).backgroundColor(PRIMARY_COLOR))
+          Surface(initModifier().width(150.px).height(150.px).backgroundColor(PRIMARY_HOVER_COLOR))
+          Surface(initModifier().width(100.px).height(100.px).backgroundColor(PRIMARY_ACTIVE_COLOR))
+
   "/testing":
     tDiv:
       Column(1.em):
@@ -86,8 +97,8 @@ appRoutes "app":
             .textColor(BACKGROUND_COLOR)
         ):
           Column(
-            justifyContent = "center",
-            alignItems = "center",
+            horizontal = "center",
+            vertical = "center",
             modifier = initModifier()
               .height("100%")
           ):
