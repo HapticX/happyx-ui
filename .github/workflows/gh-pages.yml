@@ -63,6 +63,7 @@ jobs:
       
       - name: Screenshot Website
         run: |
+          rm rf -f screenshot.png
           pageres https://hapticx.github.io/happyx-ui/#/ --delay=5 --filename='screenshot'
 
       - name: Commit screenshot 🔨
