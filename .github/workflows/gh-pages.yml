@@ -69,6 +69,14 @@ jobs:
           source: https://hapticx.github.io/happyx-ui/#/
           path: screenshot.png
 
-      - name: Install Dependencies 🔃
+      - name: Commit screenshot 🔨
         run: |
           ls
+          git config --local user.email "action[bot]@github.com"
+          git config --local user.name "github-actions[bot]"
+          git add screenshot.png
+          git commit -m "[bot] update screenshot.png"
+
+      - uses: ad-m/github-push-action@master
+        with:
+        github_token: ${{ secrets.SECRET_TOKEN }}
