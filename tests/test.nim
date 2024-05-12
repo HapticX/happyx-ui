@@ -25,9 +25,10 @@ appRoutes "app":
         Title("Cards")
         Row(1.rem):
           Card():
-            Column():
+            Column(1.rem):
               Title("Hello, world!")
-              Text("Lorem Ipsum")
+              Input:
+                "Who are you?"
   # "/testing":
   #   tDiv:
   #     Column(1.em):

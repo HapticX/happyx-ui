@@ -1,7 +1,10 @@
 import
   std/strformat,
   std/strutils,
+  std/random,
   happyx
+
+export strformat
 
 
 proc px*(val: SomeNumber): string = $val.float & "px"
@@ -11,9 +14,58 @@ proc vw*(val: int): string = $val & "vw"
 proc vh*(val: int): string = $val & "vh"
 
 
+proc uid*: string =
+  result = "c"
+  for i in 0..4: result &= $rand(0..9)
+  result &= "-"
+  for i in 0..16: result &= $rand(0..9)
+
+
 type
   Modifier* = ref object
     style*: seq[string]
+  Cursor = enum
+    Default = "cursor"
+    Pointer = "pointer"
+    Help = "help"
+    ContextMenu = "context-menu"
+    Progress = "progress"
+    Wait = "wait"
+    Cell = "cell"
+    Crosshair = "crosshair"
+    Text = "text"
+    VerticalText = "vertical-text"
+    Alias = "alias"
+    Copy = "copy"
+    Move = "move"
+    NoDrop = "no-drop"
+    NotAllowed = "not-allowed"
+    Grab = "grab"
+    Grabbing = "grabbing"
+    AllScroll = "all-scroll"
+    ColResize = "col-resize"
+    RowResize = "row-resize"
+    NResize = "n-resize"
+    SResize = "s-resize"
+    WResize = "w-resize"
+    EResize = "e-resize"
+    NeResize = "ne-resize"
+    NwResize = "nw-resize"
+    SeResize = "se-resize"
+    SwResize = "sw-resize"
+    EwResize = "ew-resize"
+    NsResize = "ns-resize"
+    NeswResize = "nesw-resize"
+    NwseResize = "nwse-resize"
+    ZoomIn = "zoom-in"
+    ZoomOut = "zoom-out"
+  DropShadow = enum
+    XM = "filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.05));"
+    Default = "drop-shadow	filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));"
+    MD = "filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));"
+    LG = "filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));"
+    XL = "filter: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));"
+    XXL = "filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));"
 
 
 proc initModifier*: Modifier =
@@ -74,6 +126,15 @@ proc fontSize*(self: Modifier, value: string): Modifier =
   self
 proc dropShadow*(self: Modifier, size: string, color: string = "#000000"): Modifier =
   self.style.add(fmt"filter: drop-shadow(0 0 {size} {color});")
+  self
+proc dropShadow*(self: Modifier, size: DropShadow): Modifier =
+  self.style.add($size)
+  self
+proc cursor(self: Modifier, cursor: string): Modifier =
+  self.style.add(fmt"cursor: {cursor}")
+  self
+proc cursor(self: Modifier, cursor: Cursor): Modifier =
+  self.style.add(fmt"cursor: {cursor}")
   self
 
 

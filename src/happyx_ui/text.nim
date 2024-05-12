@@ -6,12 +6,14 @@ import
 let style = buildHtml:
   tStyle: """
     p.hpx-title {
-      font-size: 24px;
+      font-size: 34px;
       font-weight: 700;
+      margin: .4rem 0;
     }
     p.hpx-text {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 500;
+      margin: 0;
     }
   """
 document.head.appendChild(style.children[0])

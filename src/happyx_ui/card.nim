@@ -8,16 +8,12 @@ let style = buildHtml:
   tStyle:
     {fmt("""
     div.hpx-card {
-      border-radius: 1rem;
-      filter: drop-shadow(0 0 .5rem #00000090);
+      border-radius: 1.5rem;
+      filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));
       background-color: <BACKGROUND_COLOR>;
       transition: all;
       transition-duration: .3s;
-      padding: 1rem;
-    }
-    div.hpx-card:hover {
-      transform: scale(105%);
-      background-color: <BACKGROUND_HOVER_COLOR>;
+      padding: 2rem;
     }
   """, '<', '>')}
 document.head.appendChild(style.children[0])

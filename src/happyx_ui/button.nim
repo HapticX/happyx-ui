@@ -1,11 +1,9 @@
 import
   happyx,
   ./colors,
-  ./core
+  ./core,
+  ./events
 
-
-type ButtonAction* = proc(): void
-const defaultButtonAction* = proc() = discard
 
 let style = buildHtml:
   tStyle:
@@ -22,7 +20,8 @@ let style = buildHtml:
         transition: all;
         transition-duration: .3s;
         color: <BACKGROUND_COLOR>;
-        font-weight: 700;
+        font-weight: 900;
+        font-size: 16px;
       }
 
       button.hpx-button:hover {
@@ -56,14 +55,14 @@ let style = buildHtml:
 document.head.appendChild(style.children[0])
 
 
-proc Button*(action: ButtonAction = defaultButtonAction, modifier: Modifier = initModifier(),
+proc Button*(onClick: OnClick = defOnClick, modifier: Modifier = initModifier(),
              class: string = "", stmt: TagRef = nil): TagRef =
   buildHtml:
     tButton(style = modifier.build(), class = "hpx-button " & class):
       if not stmt.isNil:
         stmt
       @click:
-        action()
+        onClick()
       @click:
         let posX = ev.target.offsetLeft
         let posY = ev.target.offsetTop

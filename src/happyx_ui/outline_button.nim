@@ -2,7 +2,7 @@ import
   happyx,
   ./colors,
   ./core,
-  ./button
+  ./events
 
 
 let style = buildHtml:
@@ -18,6 +18,7 @@ let style = buildHtml:
       transition-duration: .3s;
       color: <PRIMARY_COLOR>;
       font-weight: 700;
+      font-size: 16px;
     }
 
     button.hpx-outlined-button:hover {
@@ -33,11 +34,11 @@ let style = buildHtml:
 document.head.appendChild(style.children[0])
 
 
-proc OutlineButton*(action: ButtonAction = defaultButtonAction, modifier: Modifier = initModifier(),
+proc OutlineButton*(onClick: OnClick = defOnClick, modifier: Modifier = initModifier(),
                     class: string = "", stmt: TagRef = nil): TagRef =
   buildHtml:
     tButton(style = modifier.build(), class = "hpx-outlined-button " & class):
       if not stmt.isNil:
         stmt
       @click:
-        action()
+        onClick()
