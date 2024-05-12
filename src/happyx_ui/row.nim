@@ -1,23 +1,19 @@
 import
   happyx,
-  ./core,
-  ./base
+  ./core
 
 
-component Row of Base:
-  spacing: string = "0"
-  justifyContent: string = "start"
-  alignItems: string = "start"
-
-  html:
-    tDiv(class = "row", style = self.modifier.build()):
-      slot
-  
-  `style`: """
-    div.row {
-      display: flex;
-      gap: <self.spacing>;
-      justify-content: <self.justifyContent>;
-      align-items: <self.alignItems>;
-    }
-  """
+proc Row*(spacing: string = "0", justifyContent: string = "start", alignItems: string = "start",
+          modifier: Modifier = initModifier(), class: string = "", stmt: TagRef = nil): TagRef =
+  buildHtml:
+    tDiv(class = "hpx-row " & class, style = modifier.build()):
+      if not stmt.isNil:
+        stmt
+    tStyle: {fmt("""
+      div.hpx-row {
+        display: flex;
+        gap: <spacing>;
+        justify-content: <justifyContent>;
+        align-items: <alignItems>;
+      }
+    """, '<', '>')}

@@ -1,39 +1,39 @@
 import
   std/strutils,
   happyx,
-  ./core,
-  ./base
+  ./core
 
 
-component Image of Base:
-  source: string = ""
-  alt: string = ""
-  width: string = "auto"
-  height: string = "auto"
-
-  html:
-    if self.source.endsWith"svg":
+proc Image*(source: string = "", alt: string = "", width: string = "auto", height: string = "auto",
+            modifier: Modifier = initModifier(), class: string = ""): TagRef =
+  buildHtml:
+    if source.endsWith"svg":
       tObject(
         type = "image/svg+xml",
-        style = self.modifier.build(),
-        data = self.source,
+        style = modifier.build(),
+        data = source,
+        class = class,
         width =
-          if self.width != "auto":
-            self.width.val
+          if width != "auto":
+            width
           else:
             "",
         height =
-          if self.height != "auto":
-            self.height.val
+          if height != "auto":
+            height
           else:
             "",
       )
     else:
-      tImg(src = self.source, alt = self.alt, style = self.modifier.build())
-  
-  `style`: """
-    img {
-      width: <self.width>;
-      height: <self.height>;
-    }
-  """
+      tImg(
+        src = source,
+        alt = alt,
+        style = modifier.build(),
+        class = "hpx-image " & class
+      )
+    tStyle: {fmt("""
+      img.hpx-image {
+        width: <width>;
+        height: <height>;
+      }
+    """, '<', '>')}

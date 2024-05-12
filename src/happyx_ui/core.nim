@@ -51,8 +51,8 @@ proc height*(self: Modifier, value: string): Modifier =
 proc background*(self: Modifier, value: string): Modifier =
   self.style.add(fmt"background: {value}")
   self
-proc bacgkroundColor*(self: Modifier, value: string): Modifier =
-  self.style.add(fmt"bacgkround-color: {value}")
+proc backgroundColor*(self: Modifier, value: string): Modifier =
+  self.style.add(fmt"background-color: {value}")
   self
 proc borderRadius*(self: Modifier, value: string): Modifier =
   self.style.add(fmt"border-radius: {value}")
@@ -68,6 +68,12 @@ proc borderStyle*(self: Modifier, value: string): Modifier =
   self
 proc textColor*(self: Modifier, value: string): Modifier =
   self.style.add(fmt"color: {value}")
+  self
+proc fontSize*(self: Modifier, value: string): Modifier =
+  self.style.add(fmt"font-size: {value}")
+  self
+proc dropShadow*(self: Modifier, size: string, color: string = "#000000"): Modifier =
+  self.style.add(fmt"filter: drop-shadow(0 0 {size} {color});")
   self
 
 
