@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - 'master'
+    paths-ignore:
+      - 'docs/**'
+      - '.github/ISSUE_TEMPLATE/*'
+      - '*.md'
+      - '*.nimble'
+      - '.gitignore'
+      - 'LICENSE'
 
 permissions:
   contents: write
@@ -55,3 +62,13 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./tests
         if: github.ref == 'refs/heads/master'
+      
+      - name: Screenshot Website
+        uses: swinton/screenshot-website@v1.x
+        with:
+          source: https://hapticx.github.io/happyx-ui/#/
+          destination: screenshot.png
+
+      - name: Install Dependencies 🔃
+        run: |
+          ls
