@@ -3,10 +3,11 @@
 # HappyX-UI
 ### HappyX UI library
 
+[![Github Pages](https://img.shields.io/badge/LIVE_DEMO-100000?style=for-the-badge&logo=githubpages&logoColor=000000&labelColor=FFFFFF&color=CD7777)](https://hapticx.github.io/happyx-ui/#/)
+
 </div>
 
 This library was inspired by Jetpack Compose. It contains components that allow you to efficiently and quickly create an application.
-
 
 ## TODO 🏁
 ### Simple Components
