@@ -1,0 +1,57 @@
+name: Github Pages 🌐
+
+on:
+  push:
+    branches:
+      - 'master'
+
+permissions:
+  contents: write
+
+jobs:
+  live_demo:
+    runs-on: ubuntu-latest
+    env:
+      nim_version: '2.0.4'
+      node_version: '20'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ env.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.node_version }}
+      
+      - name: Install uglify-js 👀
+        run: |
+          npm install uglify-js -g
+
+      - name: Cache nimble
+        id: cache-nimble
+        uses: actions/cache@v1
+        with:
+          path: ~/.nimble
+          key: ${{ runner.os }}-nimble-${{ hashFiles('*.nimble') }}
+      
+      - uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: ${{ env.nim_version }}
+
+      - name: Install Dependencies 🔃
+        run: |
+          nimble refresh
+          nimble install happyx -y
+      
+      - name: Build HappyX website 🌐
+        timeout-minutes: 2
+        run: |
+          cd tests
+          nim js -d:danger --opt:size --hints:off --warnings:off test
+          uglifyjs test.js -c -m --mangle-props regex=/N[ST]I\w+/ -o test.js
+
+      - name: Deploy documents 💨
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./tests
+        if: github.ref == 'refs/heads/master'
