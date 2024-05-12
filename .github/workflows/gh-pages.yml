@@ -71,7 +71,7 @@ jobs:
           ls
           git config --local user.email ${{ secrets.BOT_EMAIL }}
           git config --local user.name "github-actions [bot]"
-          git add screenshot.png --quiet
+          git add screenshot.png
           git commit -m "[bot] update screenshot.png" --quiet
 
       - uses: ad-m/github-push-action@master
