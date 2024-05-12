@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Use Node.js ${{ env.node_version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.node_version }}
       
@@ -35,7 +35,7 @@ jobs:
 
       - name: Cache nimble
         id: cache-nimble
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ~/.nimble
           key: ${{ runner.os }}-nimble-${{ hashFiles('*.nimble') }}
@@ -67,7 +67,7 @@ jobs:
         uses: swinton/screenshot-website@v1.x
         with:
           source: https://hapticx.github.io/happyx-ui/#/
-          destination: screenshot.png
+          path: screenshot.png
 
       - name: Install Dependencies 🔃
         run: |
