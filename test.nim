@@ -13,8 +13,9 @@ var
 appRoutes "app":
   "/":
     Surface(initModifier()
-      .width(100.vw)
-      .height(100.vh)
+      .minWidth(100.vw)
+      .minHeight(100.vh)
+      .height("100%")
       .backgroundColor(BACKGROUND_COLOR)
       .textColor(FOREGROUND_COLOR)
     ):
