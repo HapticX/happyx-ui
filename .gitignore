@@ -19,3 +19,5 @@ happyx_ui_linkerArgs.txt
 # Compiled
 *.js
 *.exe
+
+init.sh
