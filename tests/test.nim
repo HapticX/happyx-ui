@@ -46,7 +46,14 @@ appRoutes "app":
               Text("There are checkboxes")
               Checkbox(state = isMale):
                 "Are you male?"
+              Text("Progress bar 👀")
               Progress(state = amount)
+          Card():
+            Column(1.rem):
+              Title("Other Inputs")
+              Text("switchers")
+              Switcher(state = isMale):
+                "Are you male?"
         Title("Containers 👀")
         Row(2.rem):
           Column():
