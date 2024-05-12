@@ -28,10 +28,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.node_version }}
-      
-      - name: Install uglify-js 👀
-        run: |
-          npm install uglify-js -g
 
       - name: Cache nimble
         id: cache-nimble
@@ -46,6 +42,8 @@ jobs:
 
       - name: Install Dependencies 🔃
         run: |
+          npm install uglify-js -g
+          npm install --global pageres-cli
           nimble refresh
           nimble install happyx -y
       
@@ -64,10 +62,8 @@ jobs:
         if: github.ref == 'refs/heads/master'
       
       - name: Screenshot Website
-        uses: swinton/screenshot-website@v1.x
-        with:
-          source: https://hapticx.github.io/happyx-ui/#/
-          path: screenshot.png
+        run: |
+          pageres https://hapticx.github.io/happyx-ui/#/ --delay=5 --filename='screenshot.png'
 
       - name: Commit screenshot 🔨
         run: |
