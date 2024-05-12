@@ -9,9 +9,13 @@ export strformat
 
 proc px*(val: SomeNumber): string = $val.float & "px"
 proc em*(val: SomeNumber): string = $val.float & "em"
+proc vw*(val: SomeNumber): string = $val.float & "vw"
+proc vh*(val: SomeNumber): string = $val.float & "vh"
+proc pt*(val: SomeNumber): string = $val.float & "pt"
+proc deg*(val: SomeNumber): string = $val.float & "deg"
+proc rad*(val: SomeNumber): string = $val.float & "rad"
+proc turn*(val: SomeNumber): string = $val.float & "turn"
 proc rem*(val: SomeNumber): string = $val.float & "rem"
-proc vw*(val: int): string = $val & "vw"
-proc vh*(val: int): string = $val & "vh"
 
 
 proc uid*: string =
@@ -72,6 +76,13 @@ proc initModifier*: Modifier =
   Modifier(style: @[])
 
 
+proc indexOf*(self: Modifier, key: string): int =
+  for i in 0..self.style.high:
+    if key & ":" in self.style[i]:
+      return i
+  return -1
+
+
 proc padding*(self: Modifier, left, top, right, bottom: string): Modifier =
   self.style.add(fmt"padding: {top} {right} {bottom} {left}")
   self
@@ -100,12 +111,134 @@ proc width*(self: Modifier, value: string): Modifier =
 proc height*(self: Modifier, value: string): Modifier =
   self.style.add(fmt"height: {value}")
   self
+
+
+proc rotate*(self: Modifier, x, y, z: bool, value: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" rotate({x.int} {y.int} {z.int} {value})"
+  else:
+    self.style.add(fmt"transform: rotate({x.int} {y.int} {z.int} {value})")
+  self
+proc rotate*(self: Modifier, value: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" rotate({value})"
+  else:
+    self.style.add(fmt"transform: rotate({value})")
+  self
+proc rotate3d*(self: Modifier, x, y, z: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" rotate3d({x} {y} {z})"
+  else:
+    self.style.add(fmt"transform: rotate3d({x} {y} {z})")
+  self
+proc rotateX*(self: Modifier, value: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" rotateX({value})"
+  else:
+    self.style.add(fmt"transform: rotateX({value})")
+  self
+proc rotateY*(self: Modifier, value: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" rotateY({value})"
+  else:
+    self.style.add(fmt"transform: rotateY({value})")
+  self
+proc rotateZ*(self: Modifier, value: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" rotateY({value})"
+  else:
+    self.style.add(fmt"transform: rotateZ({value})")
+  self
+
+
+proc translate*(self: Modifier, x, y: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" translate({x} {y})"
+  else:
+    self.style.add(fmt"transform: translate({x} {y})")
+  self
+proc translate3d*(self: Modifier, x, y, z: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" translate3d({x} {y} {z})"
+  else:
+    self.style.add(fmt"transform: translate3d({x} {y} {z})")
+  self
+proc translateX*(self: Modifier, value: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" translateX({value})"
+  else:
+    self.style.add(fmt"transform: translateX({value})")
+  self
+proc translateY*(self: Modifier, value: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" translateY({value})"
+  else:
+    self.style.add(fmt"transform: translateY({value})")
+  self
+proc translateZ*(self: Modifier, value: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" translateZ({value})"
+  else:
+    self.style.add(fmt"transform: translateZ({value})")
+  self
+
+
+proc scale*(self: Modifier, x, y: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" scale({x} {y})"
+  else:
+    self.style.add(fmt"transform: scale({x} {y})")
+  self
+proc scale3d*(self: Modifier, x, y, z: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" scale3d({x} {y} {z})"
+  else:
+    self.style.add(fmt"transform: scale3d({x} {y} {z})")
+  self
+proc scaleX*(self: Modifier, value: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" scaleX({value})"
+  else:
+    self.style.add(fmt"transform: scaleX({value})")
+  self
+proc scaleY*(self: Modifier, value: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" scaleY({value})"
+  else:
+    self.style.add(fmt"transform: scaleY({value})")
+  self
+proc scaleZ*(self: Modifier, value: string): Modifier =
+  let i = self.indexOf("transform")
+  if i != -1:
+    self.style[i] &= fmt" scaleZ({value})"
+  else:
+    self.style.add(fmt"transform: scaleZ({value})")
+  self
+
+
 proc background*(self: Modifier, value: string): Modifier =
   self.style.add(fmt"background: {value}")
   self
 proc backgroundColor*(self: Modifier, value: string): Modifier =
   self.style.add(fmt"background-color: {value}")
   self
+
+
 proc borderRadius*(self: Modifier, value: string): Modifier =
   self.style.add(fmt"border-radius: {value}")
   self
@@ -118,18 +251,24 @@ proc borderWidth*(self: Modifier, value: string): Modifier =
 proc borderStyle*(self: Modifier, value: string): Modifier =
   self.style.add(fmt"border-style: {value}")
   self
+
+
 proc textColor*(self: Modifier, value: string): Modifier =
   self.style.add(fmt"color: {value}")
   self
 proc fontSize*(self: Modifier, value: string): Modifier =
   self.style.add(fmt"font-size: {value}")
   self
+
+
 proc dropShadow*(self: Modifier, size: string, color: string = "#000000"): Modifier =
   self.style.add(fmt"filter: drop-shadow(0 0 {size} {color});")
   self
 proc dropShadow*(self: Modifier, size: DropShadow): Modifier =
   self.style.add($size)
   self
+
+
 proc cursor(self: Modifier, cursor: string): Modifier =
   self.style.add(fmt"cursor: {cursor}")
   self
