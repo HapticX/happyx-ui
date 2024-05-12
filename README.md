@@ -9,6 +9,7 @@ This library was inspired by Jetpack Compose. It contains components that allow 
 
 
 ## TODO 🏁
+### Simple Components
 - [x] `Button`, `OutlineButton`;
 - [x] `Input`, `OutlineInput`, `Checkbox`;
 - [x] `Surface`;
@@ -20,15 +21,17 @@ This library was inspired by Jetpack Compose. It contains components that allow 
 - [ ] `Box` (container with child position absolute);
 - [ ] `Grid`;
 - [ ] `Slider` (range slider);
-- [ ] `Breadcrumb` (page navigation);
-- [ ] `Dropdown` (dropdown menu);
 - [ ] `Stepper` (number changer);
 - [ ] `Tag` (for content);
+- [ ] `Tooltip`;
+- [ ] `Switcher`;
+
+### Complex Components
+- [ ] `Breadcrumb` (page navigation);
+- [ ] `Dropdown` (dropdown menu);
 - [ ] `BottomNavigation`;
 - [ ] `TabNavigation`;
 - [ ] `Pagination`;
-- [ ] `Tooltip`;
-- [ ] `Switcher`;
 - [ ] `Tree`;
 
 
