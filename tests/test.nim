@@ -7,6 +7,7 @@ var
   name = remember ""
   age = remember 0
   isMale = remember true
+  amount = remember 35
 
 
 appRoutes "app":
@@ -44,6 +45,7 @@ appRoutes "app":
               Text("There are checkboxes")
               Checkbox(state = isMale):
                 "Are you male?"
+              Progress(state = amount)
   "/testing":
     tDiv:
       Column(1.em):
