@@ -5,6 +5,9 @@
 
 [![Github Pages](https://img.shields.io/badge/LIVE_DEMO-100000?style=for-the-badge&logo=github&logoColor=f44336&labelColor=141d1f&color=f44336)](https://hapticx.github.io/happyx-ui/#/)
 
+
+[![wakatime](https://wakatime.com/badge/user/eaf11f95-5e2a-4b60-ae6a-38cd01ed317b/project/3d17a540-e4d1-458e-a335-fa8908dba246.svg?style=for-the-badge)](https://wakatime.com/badge/user/eaf11f95-5e2a-4b60-ae6a-38cd01ed317b/project/3d17a540-e4d1-458e-a335-fa8908dba246)
+
 </div>
 
 This library was inspired by Jetpack Compose. It contains components that allow you to efficiently and quickly create an application.
