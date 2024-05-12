@@ -308,6 +308,30 @@ proc sticky*(self: Modifier): Modifier =
   self
 
 
+proc colSpan*(self: Modifier, amount: int = 1): Modifier =
+  self.style.add(fmt"grid-column: span {amount} / span {amount};")
+  self
+proc rowSpan*(self: Modifier, amount: int = 1): Modifier =
+  self.style.add(fmt"grid-row: span {amount} / span {amount};")
+  self
+
+proc flowRow*(self: Modifier): Modifier =
+  self.style.add("grid-auto-flow: row;")
+  self
+proc flowCol*(self: Modifier): Modifier =
+  self.style.add("grid-auto-flow: column;")
+  self
+proc flowDense*(self: Modifier): Modifier =
+  self.style.add("grid-auto-flow: dense;")
+  self
+proc flowRowDense*(self: Modifier): Modifier =
+  self.style.add("grid-auto-flow: row dense;")
+  self
+proc flowColDense*(self: Modifier): Modifier =
+  self.style.add("grid-auto-flow: column dense;")
+  self
+
+
 proc build*(self: Modifier): string =
   self.style.join(";")
 proc build*(self: State[Modifier]): string =

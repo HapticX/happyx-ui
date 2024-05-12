@@ -23,7 +23,7 @@ proc Box*(horizontal: string = "start", vertical: string = "start",
     """, '<', '>')}
 
 
-proc Column*(spacing: string = "0", horizontal: string = "start", vertical: string = "start",
+proc Column*(spacing: string = "4px", horizontal: string = "start", vertical: string = "start",
              modifier: Modifier = initModifier(), class: string = "", stmt: TagRef = nil): TagRef =
   let id = uid()
   buildHtml:
@@ -41,7 +41,7 @@ proc Column*(spacing: string = "0", horizontal: string = "start", vertical: stri
     """, '<', '>')}
 
 
-proc Row*(spacing: string = "0", horizontal: string = "start", vertical: string = "start",
+proc Row*(spacing: string = "4px", horizontal: string = "start", vertical: string = "start",
           modifier: Modifier = initModifier(), class: string = "", stmt: TagRef = nil): TagRef =
   let id = uid()
   buildHtml:
@@ -52,6 +52,39 @@ proc Row*(spacing: string = "0", horizontal: string = "start", vertical: string 
       div.hpx-row-<id> {
         display: flex;
         gap: <spacing>;
+        justify-content: <horizontal>;
+        align-items: <vertical>;
+      }
+    """, '<', '>')}
+
+
+proc Grid*(hSpacing: string = "4px", vSpacing: string = "4px", horizontal: string = "start",
+           vertical: string = "start", cols: int = -1, rows: int = -1,
+           modifier: Modifier = initModifier(), class: string = "",
+           stmt: TagRef = nil): TagRef =
+  let
+    id = uid()
+    colsCss =
+      if cols != -1:
+        fmt"grid-template-columns: repeat({cols}, minmax(0, 1fr));"
+      else:
+        ""
+    rowsCss =
+      if cols != -1:
+        fmt"grid-template-rows: repeat({rows}, minmax(0, 1fr));"
+      else:
+        ""
+  buildHtml:
+    tDiv(class = fmt"hpx-grid-{id} {class}", style = modifier.build()):
+      if not stmt.isNil:
+        stmt
+    tStyle: {fmt("""
+      div.hpx-grid-<id> {
+        display: grid;
+        <colsCss>
+        <rowsCss>
+        column-gap: <hSpacing>;
+        row-gap: <vSpacing>;
         justify-content: <horizontal>;
         align-items: <vertical>;
       }
