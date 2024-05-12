@@ -57,9 +57,10 @@ appRoutes "app":
                 .width(256.px)
                 .height(256.px)
             ):
-              Surface(initModifier().width(200.px).height(200.px).backgroundColor(PRIMARY_COLOR))
-              Surface(initModifier().width(150.px).height(150.px).backgroundColor(PRIMARY_HOVER_COLOR))
-              Surface(initModifier().width(100.px).height(100.px).backgroundColor(PRIMARY_ACTIVE_COLOR))
+              ChildModifier(initModifier().borderRadius(1.rem)):
+                Surface(initModifier().width(200.px).height(200.px).backgroundColor(PRIMARY_COLOR))
+                Surface(initModifier().width(150.px).height(150.px).backgroundColor(PRIMARY_HOVER_COLOR))
+                Surface(initModifier().width(100.px).height(100.px).backgroundColor(PRIMARY_ACTIVE_COLOR))
           Column():
             Text("Row container")
             Row(
@@ -68,9 +69,10 @@ appRoutes "app":
                 .width(256.px)
                 .height(256.px)
             ):
-              Surface(initModifier().width(96.px).height(96.px).backgroundColor(PRIMARY_COLOR))
-              Surface(initModifier().width(64.px).height(64.px).backgroundColor(PRIMARY_HOVER_COLOR))
-              Surface(initModifier().width(32.px).height(32.px).backgroundColor(PRIMARY_ACTIVE_COLOR))
+              ChildModifier(initModifier().borderRadius(1.rem)):
+                Surface(initModifier().width(96.px).height(96.px).backgroundColor(PRIMARY_COLOR))
+                Surface(initModifier().width(64.px).height(64.px).backgroundColor(PRIMARY_HOVER_COLOR))
+                Surface(initModifier().width(32.px).height(32.px).backgroundColor(PRIMARY_ACTIVE_COLOR))
           Column():
             Text("Column container")
             Column(
@@ -79,16 +81,18 @@ appRoutes "app":
                 .width(256.px)
                 .height(256.px)
             ):
-              Surface(initModifier().width(96.px).height(96.px).backgroundColor(PRIMARY_COLOR))
-              Surface(initModifier().width(64.px).height(64.px).backgroundColor(PRIMARY_HOVER_COLOR))
-              Surface(initModifier().width(32.px).height(32.px).backgroundColor(PRIMARY_ACTIVE_COLOR))
+              ChildModifier(initModifier().borderRadius(1.rem)):
+                Surface(initModifier().width(96.px).height(96.px).backgroundColor(PRIMARY_COLOR))
+                Surface(initModifier().width(64.px).height(64.px).backgroundColor(PRIMARY_HOVER_COLOR))
+                Surface(initModifier().width(32.px).height(32.px).backgroundColor(PRIMARY_ACTIVE_COLOR))
           Column():
             Text("Column container")
             Grid(cols = 3):
-              Surface(initModifier().borderRadius(1.rem).width("100%").height("100%").colSpan(2).backgroundColor(PRIMARY_COLOR))
-              Surface(initModifier().borderRadius(1.rem).width(64.px).height(64.px).backgroundColor(PRIMARY_HOVER_COLOR))
-              Surface(initModifier().borderRadius(1.rem).width(64.px).height(64.px).backgroundColor(PRIMARY_ACTIVE_COLOR))
-              Surface(initModifier().borderRadius(1.rem).width("100%").height("100%").colSpan(2).backgroundColor(PRIMARY_COLOR))
+              ChildModifier(initModifier().borderRadius(1.rem)):
+                Surface(initModifier().width("100%").height("100%").colSpan(2).backgroundColor(PRIMARY_COLOR))
+                Surface(initModifier().width(64.px).height(64.px).backgroundColor(PRIMARY_HOVER_COLOR))
+                Surface(initModifier().width(64.px).height(64.px).backgroundColor(PRIMARY_ACTIVE_COLOR))
+                Surface(initModifier().width("100%").height("100%").colSpan(2).backgroundColor(PRIMARY_COLOR))
 
   "/testing":
     tDiv:

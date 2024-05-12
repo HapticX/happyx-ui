@@ -89,3 +89,10 @@ proc Grid*(hSpacing: string = "4px", vSpacing: string = "4px", horizontal: strin
         align-items: <vertical>;
       }
     """, '<', '>')}
+
+
+proc ChildModifier*(modifier: Modifier, stmt: TagRef): TagRef =
+  let style: cstring = cstring(modifier.build())
+  for i in stmt.childNodes:
+    {.emit: "`i`.style.cssText += `style`".}
+  stmt

@@ -29,6 +29,7 @@ This library was inspired by Jetpack Compose. It contains components that allow 
 - [ ] `Tag` (for content);
 - [ ] `Tooltip`;
 - [ ] `Switcher`;
+- [x] `ChildModifier` (applies modifier to all children (not recursive));
 
 ### Complex Components
 - [ ] `Breadcrumb` (page navigation);
