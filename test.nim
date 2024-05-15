@@ -22,10 +22,19 @@ appRoutes "app":
       Column():
         Title("Buttons 🧈")
         Row(1.rem):
-          Button(proc() =
-            echo "default button was clicked"
-          ):
-            "default button"
+          tDiv:
+            Tooltip(delay = 1):
+              Surface(initModifier()
+                .borderRadius(0.5.rem)
+                .padding(0.2.rem)
+                .dropShadow(DropShadow.MD)
+                .backgroundColor(BACKGROUND_COLOR)
+              ):
+                Text("Hello world")
+            Button(proc() =
+              echo "default button was clicked"
+            ):
+              "default button"
           OutlineButton(proc() =
             echo "outline button was clicked"
           ):
@@ -100,6 +109,8 @@ appRoutes "app":
                 Surface(initModifier().width(64.px).height(64.px).backgroundColor(PRIMARY_HOVER_COLOR))
                 Surface(initModifier().width(64.px).height(64.px).backgroundColor(PRIMARY_ACTIVE_COLOR))
                 Surface(initModifier().width("100%").height("100%").colSpan(2).backgroundColor(PRIMARY_COLOR))
+          Tooltip:
+            "Hello"
 
   "/testing":
     tDiv:
