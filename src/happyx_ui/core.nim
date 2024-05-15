@@ -63,7 +63,7 @@ type
     NwseResize = "nwse-resize"
     ZoomIn = "zoom-in"
     ZoomOut = "zoom-out"
-  DropShadow = enum
+  DropShadow* = enum
     XM = "filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.05));"
     Default = "drop-shadow	filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));"
     MD = "filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));"

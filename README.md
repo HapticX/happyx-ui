@@ -27,7 +27,7 @@ This library was inspired by Jetpack Compose. It contains components that allow 
 - [ ] `Slider` (range slider);
 - [ ] `Stepper` (number changer);
 - [ ] `Tag` (for content);
-- [ ] `Tooltip`;
+- [x] `Tooltip`;
 - [x] `Switcher`;
 - [x] `ChildModifier` (applies modifier to all children (not recursive));
 

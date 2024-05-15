@@ -31,7 +31,7 @@ let style = buildHtml:
       button.hpx-button:active {
         background-color: <PRIMARY_ACTIVE_COLOR>;
       }
-          
+      
       span.hpx-rippleAnimation {
         width: 0;
         height: 0;
@@ -42,7 +42,7 @@ let style = buildHtml:
         opacity: 1;
       }
       .hpx-rippleAnimation {
-          animation: ripple .3s ease;
+          animation: ripple .5s ease;
       }
 
       @keyframes ripple {
@@ -87,7 +87,7 @@ proc Button*(onClick: OnClick = defOnClick, modifier: Modifier = initModifier(),
         stmt
       @click:
         onClick()
-      @click:
+      @mousedown:
         let posX = ev.target.offsetLeft
         let posY = ev.target.offsetTop
         var buttonWidth = ev.target.offsetWidth
@@ -101,8 +101,8 @@ proc Button*(onClick: OnClick = defOnClick, modifier: Modifier = initModifier(),
           buttonWidth = buttonHeight
         
         # Get the center of the element
-        var x = (ev.MouseEvent.pageX - posX).float - buttonWidth / 2
-        var y = (ev.MouseEvent.pageY - posY).float - buttonHeight / 2
+        let x = (ev.MouseEvent.pageX - posX).float - buttonWidth / 2
+        let y = (ev.MouseEvent.pageY - posY).float - buttonHeight / 2
       
         ripple.style.width = fmt"{buttonWidth}px"
         ripple.style.height = fmt"{buttonHeight}px"
@@ -110,11 +110,13 @@ proc Button*(onClick: OnClick = defOnClick, modifier: Modifier = initModifier(),
         ripple.style.left = fmt"{x}px"
         
         ripple.classList.add("hpx-rippleAnimation")
-        
+      @mouseup:
+        let ripple = document.createElement("span")
         withVariables ev:
           withTimeout 250, t:
             clearTimeout(t)
-            ev.target.removeChild(ripple)
+            if not ripple.parentElement.isNil:
+              ev.target.removeChild(ripple)
 
 proc OutlineButton*(onClick: OnClick = defOnClick, modifier: Modifier = initModifier(),
                     class: string = "", stmt: TagRef = nil): TagRef =
