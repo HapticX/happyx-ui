@@ -45,7 +45,7 @@ jobs:
           npm install uglify-js -g
           npm install --global pageres-cli
           nimble refresh
-          nimble install happyx -y
+          nimble install happyx@#head -y
       
       - name: Build HappyX-UI Demo example 🌐
         timeout-minutes: 2
