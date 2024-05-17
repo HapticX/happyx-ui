@@ -46,12 +46,12 @@ appRoutes "app":
               Title("Hello, world!")
               Text("There are input elements")
               Row(1.rem):
-                Input(state = name, id = "username"):
+                Input(state = name, id = "username", hint = "First name"):
                   # placeholder
                   "Who are you?"
-                OutlineInput(state = name, id = "username2"):
+                OutlineInput(id = "username2", hint = "Last name"):
                   # placeholder
-                  "Who are you?"
+                  "What's your last name?"
               Text("There are checkboxes")
               Checkbox(state = isMale):
                 "Are you male?"

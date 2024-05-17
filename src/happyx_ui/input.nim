@@ -6,14 +6,14 @@ import
 
 
 proc Input*(onInput: OnInput = defOnInput, onFocus: OnFocus = defOnFocus,
-            state: State[string] = nil, id: string = "",
+            state: State[string] = nil, id: string = "", hint: string = "",
             modifier: Modifier = initModifier(), class: string = "",
             stmt: TagRef = nil): TagRef =
   let i = uid()
   buildHtml:
-    tDiv(class = fmt"hpx-input-container-{i} {class}"):
+    tDiv(class = fmt"hpx-input-container {class}"):
       tInput(
-        class = fmt"hpx-input-{i} {class}",
+        class = fmt"hpx-input {class}",
         placeholder = " ",
         id = id,
         value =
@@ -26,18 +26,25 @@ proc Input*(onInput: OnInput = defOnInput, onFocus: OnFocus = defOnFocus,
           onInput($ev.target.value)
           if not state.isNil:
             state.set($ev.target.value)
+          if ($ev.target.value).len > 0:
+            ev.target.Element.parentElement.classList.add("hpx-input-hint-container")
+          else:
+            ev.target.Element.parentElement.classList.remove("hpx-input-hint-container")
         @focus:
           onFocus(ev.target.Element)
-      tLabel(class = fmt"hpx-input-placeholder-{i}"):
+      tLabel(class = fmt"hpx-input-placeholder"):
         if not stmt.isNil:
           stmt
+      if hint.len > 0:
+        tLabel(class = fmt"hpx-input-hint"):
+          {hint}
     tStyle: {fmt("""
-      div.hpx-input-container-<i> {
+      div.hpx-input-container {
         position: relative;
         display: flex;
         align-items: center;
       }
-      input.hpx-input-<i> {
+      input.hpx-input {
         border: 0;
         border-bottom-width: .15rem;
         border-bottom-color: <PRIMARY_COLOR>;
@@ -50,13 +57,13 @@ proc Input*(onInput: OnInput = defOnInput, onFocus: OnFocus = defOnFocus,
         font-size: 18px;
         padding: .1rem .5rem;
       }
-      input.hpx-input-<i>:hover {
+      input.hpx-input:hover {
         border-bottom-color: <PRIMARY_HOVER_COLOR>;
       }
-      input.hpx-input-<i>:focus {
+      input.hpx-input:focus {
         border-bottom-color: <PRIMARY_ACTIVE_COLOR>;
       }
-      label.hpx-input-placeholder-<i> {
+      label.hpx-input-placeholder {
         position: absolute;
         transition: all;
         transition-duration: .3s;
@@ -65,11 +72,26 @@ proc Input*(onInput: OnInput = defOnInput, onFocus: OnFocus = defOnFocus,
         font-size: 16px;
         padding: .1rem .5rem;
       }
-      input.hpx-input-<i>:focus + label.hpx-input-placeholder-<i> {
+      label.hpx-input-hint {
+        position: absolute;
+        transition: all;
+        transition-duration: .3s;
+        opacity: 0;
+        pointer-events: none;
+        font-size: 16px;
+        padding: .1rem .5rem;
+      }
+      input#<id>:focus + label.hpx-input-placeholder {
         transform: scale(75%) translateX(-15%) translateY(-150%);
         opacity: .9;
       }
-      input.hpx-input-<i>:not(:placeholder-shown) + label.hpx-input-placeholder-<i> {
+      div.hpx-input-container:focus-within label.hpx-input-hint {
+        opacity: .7;
+      }
+      div.hpx-input-hint-container:focus-within label.hpx-input-hint {
+        opacity: 0;
+      }
+      input#<id>:not(:placeholder-shown) + label.hpx-input-placeholder {
         transform: scale(75%) translateX(-15%) translateY(-150%);
         opacity: .9;
       }
@@ -77,14 +99,14 @@ proc Input*(onInput: OnInput = defOnInput, onFocus: OnFocus = defOnFocus,
 
 
 proc OutlineInput*(onInput: OnInput = defOnInput, onFocus: OnFocus = defOnFocus,
-            state: State[string] = nil, id: string = "",
+            state: State[string] = nil, id: string = "", hint: string = "",
             modifier: Modifier = initModifier(), class: string = "",
             stmt: TagRef = nil): TagRef =
   let i = uid()
   buildHtml:
-    tDiv(class = fmt"hpx-input-outline-container-{i} {class}"):
+    tDiv(class = fmt"hpx-input-outline-container {class}"):
       tInput(
-        class = fmt"hpx-input-outline-{i} {class}",
+        class = fmt"hpx-input-outline {class}",
         placeholder = " ",
         id = id,
         value =
@@ -97,18 +119,25 @@ proc OutlineInput*(onInput: OnInput = defOnInput, onFocus: OnFocus = defOnFocus,
           onInput($ev.target.value)
           if not state.isNil:
             state.set($ev.target.value)
+          if ($ev.target.value).len > 0:
+            ev.target.Element.parentElement.classList.add("hpx-input-outline-hint-container")
+          else:
+            ev.target.Element.parentElement.classList.remove("hpx-input-outline-hint-container")
         @focus:
           onFocus(ev.target.Element)
-      tLabel(class = fmt"hpx-input-outline-placeholder-{i}"):
+      tLabel(class = fmt"hpx-input-outline-placeholder"):
         if not stmt.isNil:
           stmt
+      if hint.len > 0:
+        tLabel(class = fmt"hpx-input-outline-hint"):
+          {hint}
     tStyle: {fmt("""
-      div.hpx-input-outline-container-<i> {
+      div.hpx-input-outline-container {
         position: relative;
         display: flex;
         align-items: center;
       }
-      input.hpx-input-outline-<i> {
+      input.hpx-input-outline {
         border: .15rem <PRIMARY_COLOR> solid;
         transition: all;
         transition-duration: .3s;
@@ -119,13 +148,13 @@ proc OutlineInput*(onInput: OnInput = defOnInput, onFocus: OnFocus = defOnFocus,
         font-size: 18px;
         padding: .1rem .5rem;
       }
-      input.hpx-input-outline-<i>:hover {
+      input.hpx-input-outline:hover {
         border-color: <PRIMARY_HOVER_COLOR>;
       }
-      input.hpx-input-outline-<i>:focus {
+      input.hpx-input-outline:focus {
         border-color: <PRIMARY_ACTIVE_COLOR>;
       }
-      label.hpx-input-outline-placeholder-<i> {
+      label.hpx-input-outline-placeholder {
         position: absolute;
         transition: all;
         transition-duration: .3s;
@@ -134,11 +163,26 @@ proc OutlineInput*(onInput: OnInput = defOnInput, onFocus: OnFocus = defOnFocus,
         font-size: 16px;
         padding: .1rem .5rem;
       }
-      input.hpx-input-outline-<i>:focus + label.hpx-input-outline-placeholder-<i> {
+      label.hpx-input-outline-hint {
+        position: absolute;
+        transition: all;
+        transition-duration: .3s;
+        opacity: 0;
+        pointer-events: none;
+        font-size: 16px;
+        padding: .1rem .5rem;
+      }
+      input#<id>:focus + label.hpx-input-outline-placeholder {
         transform: scale(75%) translateX(-15%) translateY(-150%);
         opacity: .9;
       }
-      input.hpx-input-outline-<i>:not(:placeholder-shown) + label.hpx-input-outline-placeholder-<i> {
+      div.hpx-input-outline-container:focus-within label.hpx-input-outline-hint {
+        opacity: .7;
+      }
+      div.hpx-input-outline-hint-container:focus-within label.hpx-input-outline-hint {
+        opacity: 0;
+      }
+      input#<id>:not(:placeholder-shown) + label.hpx-input-outline-placeholder {
         transform: scale(75%) translateX(-15%) translateY(-150%);
         opacity: .9;
       }
@@ -225,9 +269,9 @@ proc Switcher*(onToggle: OnToggle = defOnToggle, state: State[bool] = nil,
     i = uid()
     switchControlClass =
       if not state.isNil and state.val:
-        fmt"hpx-switch-control-on-{i}"
+        fmt"hpx-switch-control-on-{i} hpx-switch-control-on-anim"
       else:
-        fmt"hpx-switch-control-off-{i}"
+        fmt"hpx-switch-control-off-{i} hpx-switch-control-off-anim"
     switchClass =
       if not state.isNil and state.val:
         fmt"hpx-switch-on-{i}"
@@ -266,13 +310,15 @@ proc Switcher*(onToggle: OnToggle = defOnToggle, state: State[bool] = nil,
         position: relative;
         align-items: center;
         display: flex;
-      }
-
-      div.hpx-switch-off-<i> {
-        background-color: <PRIMARY_ACTIVE_COLOR>;
+        transition: all;
+        transition-duration: .3s;
       }
 
       div.hpx-switch-on-<i> {
+        background-color: <PRIMARY_ACTIVE_COLOR>;
+      }
+
+      div.hpx-switch-off-<i> {
         background-color: <PRIMARY_HOVER_COLOR>;
       }
 
@@ -285,12 +331,12 @@ proc Switcher*(onToggle: OnToggle = defOnToggle, state: State[bool] = nil,
         height: 16px;
       }
 
-      div.hpx-switch-control-off-<i> {
+      div.hpx-switch-control-on-<i> {
         right: 4px;
         background-color: <PRIMARY_HOVER_COLOR>;
       }
 
-      div.hpx-switch-control-on-<i> {
+      div.hpx-switch-control-off-<i> {
         left: 4px;
         background-color: <PRIMARY_ACTIVE_COLOR>;
       }
@@ -299,5 +345,35 @@ proc Switcher*(onToggle: OnToggle = defOnToggle, state: State[bool] = nil,
         font-size: 18px;
         user-select: none;
         cursor: pointer;
+      }
+
+      .hpx-switch-control-on-anim {
+        animation: hpx-switch-control-off .3s;
+      }
+
+      .hpx-switch-control-off-anim {
+        animation: hpx-switch-control-on .3s;
+      }
+
+      @keyframes hpx-switch-control-on {
+        0% {
+          right: 4px;
+          left: 28px;
+        }
+        100% {
+          right: 28px;
+          left: 4px;
+        }
+      }
+
+      @keyframes hpx-switch-control-off {
+        0% {
+          right: 28px;
+          left: 4px;
+        }
+        100% {
+          right: 4px;
+          left: 28px;
+        }
       }
     """, '<', '>')}

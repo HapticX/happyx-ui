@@ -17,12 +17,14 @@ proc rad*(val: SomeNumber): string = $val.float & "rad"
 proc turn*(val: SomeNumber): string = $val.float & "turn"
 proc rem*(val: SomeNumber): string = $val.float & "rem"
 
-
+var uniqId = 0
+rendererHandlers.add(cast[tuple[key: string, p: AppEventHandler]]((key: "rendered", p: proc() =
+  {.cast(gcsafe).}:
+    uniqId = 0
+)))
 proc uid*: string =
-  result = "c"
-  for i in 0..4: result &= $rand(0..9)
-  result &= "-"
-  for i in 0..16: result &= $rand(0..9)
+  result = "c" & $uniqId & $(uniqId+1) & $(uniqId+5)
+  inc uniqId
 
 
 type

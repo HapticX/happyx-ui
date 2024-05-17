@@ -11,6 +11,7 @@ proc Tooltip*(modifier: Modifier = initModifier(),
       if not stmt.isNil:
         stmt
       tScript: {fmt("""
+        document.querySelector(".hpx-tooltip-<id>").parentElement._eventListeners = [];
         document.querySelector(".hpx-tooltip-<id>").parentElement.addEventListener('mouseover', (ev) =>> {
           const e = document.querySelector(".hpx-tooltip-<id>");
           e.classList.toggle("hpx-tooltip-on-<id>");
