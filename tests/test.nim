@@ -63,6 +63,25 @@ appRoutes "app":
               Text("switchers")
               Switcher(state = isMale):
                 "Are you male?"
+          Card(modifier = initModifier()
+            .padding(0.px)
+            .overflowHidden()
+          ):
+            Image(
+              "https://images.kinorium.com/movie/poster/2409863/w1500_52078438.jpg",
+              modifier = initModifier()
+                .width(200.px)
+                .height(240.px)
+                .objectCover()
+                .objectCenter()
+            )
+            Column(modifier = initModifier().padding(4.px, 0.px, 4.px, 10.px)):
+              Title("Fallout")
+              Row(modifier = initModifier().width(190.px).flexWrap()):
+                Tag("science fiction")
+                Tag("action")
+                Tag("drama")
+                Tag("adventure")
         Title("Containers 👀")
         Row(2.rem):
           Column():

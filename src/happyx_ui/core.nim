@@ -96,6 +96,52 @@ proc padding*(self: Modifier, value: string): Modifier =
   self
 
 
+proc objectContain*(self: Modifier): Modifier =
+  self.style.add(fmt"object-fit: contain")
+  self
+proc objectCover*(self: Modifier): Modifier =
+  self.style.add(fmt"object-fit: cover")
+  self
+proc objectFill*(self: Modifier): Modifier =
+  self.style.add(fmt"object-fit: fill")
+  self
+proc objectNone*(self: Modifier): Modifier =
+  self.style.add(fmt"object-fit: none")
+  self
+proc objectScaleDown*(self: Modifier): Modifier =
+  self.style.add(fmt"object-fit: scale-down")
+  self
+
+
+proc objectBottom*(self: Modifier): Modifier =
+  self.style.add(fmt"object-position: bottom")
+  self
+proc objectCenter*(self: Modifier): Modifier =
+  self.style.add(fmt"object-position: center")
+  self
+proc objectLeft*(self: Modifier): Modifier =
+  self.style.add(fmt"object-position: left")
+  self
+proc objectLeftBottom*(self: Modifier): Modifier =
+  self.style.add(fmt"object-position: left bottom")
+  self
+proc objectLeftTop*(self: Modifier): Modifier =
+  self.style.add(fmt"object-position: left top")
+  self
+proc objectRight*(self: Modifier): Modifier =
+  self.style.add(fmt"object-position: right")
+  self
+proc objectRightBottom*(self: Modifier): Modifier =
+  self.style.add(fmt"object-position: right bottom")
+  self
+proc objectRightTop*(self: Modifier): Modifier =
+  self.style.add(fmt"object-position: right top")
+  self
+proc objectTop*(self: Modifier): Modifier =
+  self.style.add(fmt"object-position: top")
+  self
+
+
 proc margin*(self: Modifier, left, top, right, bottom: string): Modifier =
   self.style.add(fmt"margin: {top} {right} {bottom} {left}")
   self
@@ -287,11 +333,20 @@ proc dropShadow*(self: Modifier, size: DropShadow): Modifier =
   self
 
 
-proc cursor(self: Modifier, cursor: string): Modifier =
+proc cursor*(self: Modifier, cursor: string): Modifier =
   self.style.add(fmt"cursor: {cursor}")
   self
-proc cursor(self: Modifier, cursor: Cursor): Modifier =
+proc cursor*(self: Modifier, cursor: Cursor): Modifier =
   self.style.add(fmt"cursor: {cursor}")
+  self
+
+
+proc overflowHidden*(self: Modifier): Modifier =
+  self.style.add("overflow: hidden")
+  self
+
+proc style*(self: Modifier, s: string): Modifier =
+  self.style.add(s)
   self
 
 
@@ -331,6 +386,28 @@ proc flowRowDense*(self: Modifier): Modifier =
   self
 proc flowColDense*(self: Modifier): Modifier =
   self.style.add("grid-auto-flow: column dense;")
+  self
+
+
+proc flex*(self: Modifier): Modifier =
+  self.style.add("display: flex")
+  self
+proc inline*(self: Modifier): Modifier =
+  self.style.add("display: inline")
+  self
+proc inlineFlex*(self: Modifier): Modifier =
+  self.style.add("display: inline-flex")
+  self
+
+
+proc flexWrap*(self: Modifier): Modifier =
+  self.style.add("flex-wrap: wrap")
+  self
+proc flexWrapReverse*(self: Modifier): Modifier =
+  self.style.add("flex-wrap: wrap-reverse")
+  self
+proc flexNoWrap*(self: Modifier): Modifier =
+  self.style.add("flex-wrap: nowrap")
   self
 
 
