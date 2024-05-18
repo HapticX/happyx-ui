@@ -377,3 +377,74 @@ proc Switcher*(onToggle: OnToggle = defOnToggle, state: State[bool] = nil,
         }
       }
     """, '<', '>')}
+
+
+proc Stepper*(modifier: Modifier = initModifier(), class: string = "",
+              state: State[int] = nil, min: int = 0, max: int = 10, step: int = 1): TagRef =
+  let i = uid()
+  buildHtml:
+    tDiv(class = "hpx-stepper-container-{i} {class}", style = modifier.build()):
+      tDiv(class = "hpx-stepper-button-sub hpx-stepper-button"):
+        "-"
+        @click:
+          if state.val - step >= min:
+            state.set(state.val - step)
+      tDiv(class = "current hpx-stepper-number-{i}"):
+        {state.val}
+      tDiv(class = "hpx-stepper-button-add hpx-stepper-button"):
+        "+"
+        @click:
+          if state.val + step <= max:
+            state.set(state.val + step)
+      tStyle: {fmt("""
+        .hpx-stepper-container-<i> {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: .5rem;
+          border-radius: .5rem;
+          background-color: <PRIMARY_COLOR>;
+          color: <BACKGROUND_COLOR>;
+          cursor: pointer;
+          overflow: hidden;
+          height: 1.5em;
+          position: relative;
+        }
+        .hpx-stepper-button {
+          font-weight: 700;
+          user-select: none;
+          width: 50%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          transition: all;
+          transition-duration: .3s;
+          background-color: <PRIMARY_COLOR>;
+        }
+        .hpx-stepper-button:hover {
+          background-color: <PRIMARY_HOVER_COLOR>;
+        }
+        .hpx-stepper-button:active {
+          background-color: <PRIMARY_ACTIVE_COLOR>;
+        }
+        .hpx-stepper-button-add {
+          text-align: right;
+          padding: .1rem .4rem;
+        }
+        .hpx-stepper-button-sub {
+          padding: .1rem .4rem;
+        }
+        .hpx-stepper-number-<i> {
+          display: flex;
+          font-weight: 700;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          user-select: none;
+          min-width: 32px;
+        }
+        .current {
+          font-size: 115%;
+          transform: translateY(0%);
+        }
+      """, '<', '>')}

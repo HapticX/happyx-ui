@@ -8,6 +8,7 @@ var
   age = remember 0
   isMale = remember true
   amount = remember 35
+  stepperCount = remember 5
 
 
 appRoutes "app":
@@ -63,6 +64,8 @@ appRoutes "app":
               Text("switchers")
               Switcher(state = isMale):
                 "Are you male?"
+              Text("Stepper")
+              Stepper(state = stepperCount, min = 0, max = 10, step = 1)
           Card(modifier = initModifier()
             .padding(0.px)
             .overflowHidden()

@@ -8,14 +8,14 @@ let style = buildHtml:
   tStyle: {fmt("""
     .hpx-tag {
       display: flex;
-      border-radius: .3rem;
+      border-radius: 1rem;
       border: 2px <PRIMARY_COLOR> solid;
       background-color: <PRIMARY_COLOR>70;
       color: <FOREGROUND_COLOR>;
       transition: all;
       transition-duration: .3s;
       white-space: nowrap;
-      padding: .05rem .1rem;
+      padding: .15rem .6rem;
       cursor: default;
     }
     .hpx-tag:hover {
